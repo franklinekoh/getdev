@@ -1,13 +1,14 @@
 const jwt = require('jsonwebtoken'),
     User = require('../database/models/').User,
     config= require('../config'),
+    redis = require('redis'),
     bcrypt = require('bcryptjs');
 
 module.exports.login = async (req, res) => {
-
     try {
 
         const email = req.body.email,
+            name = req.body.name,
             password = req.body.password;
 
         const user = await User.findOne({where: {email: email}});
@@ -24,7 +25,7 @@ module.exports.login = async (req, res) => {
                 status = true;
                 const payload = {
                         email: email,
-                        password: password,
+                        name: name,
                         expiration: config.auth.exp
                     },
                     options = { expiresIn: config.auth.exp, issuer: 'https://github.com/franklinekoh' },
@@ -50,4 +51,34 @@ module.exports.login = async (req, res) => {
             message: e
         });
     }
+};
+
+module.exports.logout = async (req, res) => {
+
+    try {
+        const client = redis.createClient();
+        const token = req.body.token;
+
+        client.get(token, (error, result) =>{
+            if (!result){
+                client.set(token, token, redis.print);
+            }
+
+            return res.status(200).send({
+                status: true,
+                message: 'logout successful'
+            });
+        });
+
+    }catch (e) {
+        return res.status(500).send({
+            status: false,
+            message: e
+        });
+    }
+
+};
+
+module.exports.test = async (req, res) => {
+    console.log(req.body);
 };
