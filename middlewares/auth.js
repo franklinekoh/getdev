@@ -12,15 +12,16 @@ const jwt = require('jsonwebtoken'),
 
 module.exports = {
 
-    validateToken: (req, res, next) => {
+    validateToken: async (req, res, next)  => {
 
         const token = req.body.token || req.headers.token; // Bearer <token>
         const client = redis.createClient();
-        let result;
+        let decoded;
         if (token) {
             try {
+                 await client.exists(token, function (error, result) {
+                     decoded = jwt.verify(token, config.secret);
 
-                client.get(token, function (error, result) {
                     if (error){
                         console.log(error);
                     }
@@ -29,15 +30,14 @@ module.exports = {
                             error: `Authentication error, Invalid token`,
                             status: 401
                         });
+                    }else{
+                        req.decoded = result;
+                        req.body.token = token;
+                        next();
                     }
 
                 });
 
-                result = jwt.verify(token, config.secret);
-
-                req.decoded = result;
-                req.body.token = token;
-                next();
             } catch (err) {
                return res.status(401).send({
                     error: err.toString(),

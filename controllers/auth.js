@@ -55,11 +55,12 @@ module.exports.login = async (req, res) => {
 
 module.exports.logout = async (req, res) => {
 
+    console.log('working');
     try {
         const client = redis.createClient();
         const token = req.body.token;
 
-        client.get(token, (error, result) =>{
+        await client.exists(token, (error, result) =>{
             if (!result){
                 client.set(token, token, redis.print);
             }
@@ -77,8 +78,4 @@ module.exports.logout = async (req, res) => {
         });
     }
 
-};
-
-module.exports.test = async (req, res) => {
-    console.log(req.body);
 };

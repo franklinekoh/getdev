@@ -7,7 +7,8 @@ function loadApp(){
         /*
         Routes
          */
-        const authRoute = require('./routes/auth');
+        const authRoute = require('./routes/auth'),
+            bucketListRoute = require('./routes/bucketlist');
 
     /**
      *Use helmet to secure header
@@ -33,6 +34,7 @@ function loadApp(){
     });
 
     app.use('/api/v1/auth', authRoute);
+    app.use('/api/v1/bucketlists', bucketListRoute);
 
     // Error handling
     // 404

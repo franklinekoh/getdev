@@ -1,12 +1,10 @@
 const express = require('express'),
     router = express.Router(),
-    authController = require('../controllers/auth'),
+    bucketListController = require('../controllers/bucketlist'),
     validatorMsg = require('../middlewares/validator.message'),
     auth = require('../middlewares/auth').validateToken,
     validator = require('../middlewares/validator');
 
-router.post('/login', [validator.auth.login, validatorMsg], authController.login);
-router.get('/logout', [auth], authController.logout);
-
+router.post('/', [auth], bucketListController.create);
 
 module.exports = router;
