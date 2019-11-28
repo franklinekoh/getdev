@@ -5,6 +5,6 @@ const express = require('express'),
     auth = require('../middlewares/auth').validateToken,
     validator = require('../middlewares/validator');
 
-router.post('/', [auth], bucketListController.create);
+router.post('/', [auth, validator.bucketList.create, validatorMsg], bucketListController.create);
 
 module.exports = router;

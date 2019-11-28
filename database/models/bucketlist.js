@@ -5,9 +5,13 @@ module.exports = (sequelize, DataTypes) => {
     date_created: DataTypes.DATE,
     date_modified: DataTypes.DATE,
     created_by: DataTypes.STRING
-  }, {});
+  }, {
+    timestamps: false
+  });
   Bucketlist.associate = function(models) {
-    // associations can be defined here
+    Bucketlist.hasMany(models.Listitem, {
+      foreignKey: 'bucketlist_id'
+    });
   };
   return Bucketlist;
 };

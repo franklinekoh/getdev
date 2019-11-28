@@ -1,9 +1,23 @@
-const Bucketlist = require('../database/models/').Bucketlist;
+const Bucketlist = require('../database/models/').Bucketlist,
+    moment = require('moment');
 
 module.exports.create = async (req, res) => {
 
-    console.log('yes');
     try {
+        const name = req.body.name,
+            createdBy = req.decoded.name;
+
+        await Bucketlist.create({
+            name: name,
+            date_created: moment().format(),
+            date_modified: moment().format(),
+            created_by: createdBy
+        });
+
+        return res.status(200).send({
+            status: true,
+            message: 'Bucket list created successfully'
+        });
 
     }catch (e) {
         console.log(e);

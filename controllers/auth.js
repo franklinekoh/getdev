@@ -8,7 +8,6 @@ module.exports.login = async (req, res) => {
     try {
 
         const email = req.body.email,
-            name = req.body.name,
             password = req.body.password;
 
         const user = await User.findOne({where: {email: email}});
@@ -17,7 +16,8 @@ module.exports.login = async (req, res) => {
         if (!user) {
              status = false;
         }else{
-            const passwordHash = user.dataValues.password;
+            const passwordHash = user.dataValues.password,
+                name = user.dataValues.name;
 
             if (!bcrypt.compareSync(password, passwordHash)){
                 status = false;
@@ -55,12 +55,11 @@ module.exports.login = async (req, res) => {
 
 module.exports.logout = async (req, res) => {
 
-    console.log('working');
     try {
         const client = redis.createClient();
         const token = req.body.token;
 
-        await client.exists(token, (error, result) =>{
+        client.exists(token, (error, result) =>{
             if (!result){
                 client.set(token, token, redis.print);
             }
