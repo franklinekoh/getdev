@@ -10,6 +10,9 @@ module.exports = validator = {
     bucketList: {
         create:[
             check('name', 'name field must not be empty').not().isEmpty(),
+        ],
+        update:[
+            check('name', 'name field must not be empty').not().isEmpty()
         ]
     },
     listItem: {

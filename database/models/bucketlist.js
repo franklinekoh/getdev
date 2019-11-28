@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
   });
   Bucketlist.associate = function(models) {
     Bucketlist.hasMany(models.Listitem, {
-      foreignKey: 'bucketlist_id'
+      foreignKey: 'bucketlist_id',
+      as: 'items'
     });
   };
   return Bucketlist;

@@ -10,7 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false
   });
   Listitem.associate = function(models) {
-    // associations can be defined here
+    Listitem.hasOne(models.Bucketlist, {
+      foreignKey: 'id',
+    });
   };
   return Listitem;
 };
