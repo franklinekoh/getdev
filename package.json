@@ -4,8 +4,7 @@
   "description": "A bucketList API for GetDev job assessment ",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "Bucketlist",
@@ -31,5 +30,8 @@
   },
   "devDependencies": {
     "sequelize-cli": "^5.5.1"
+  },
+  "engines": {
+    "node": "12.9.1"
   }
 }
