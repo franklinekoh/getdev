@@ -21,7 +21,6 @@ module.exports.create = async (req, res) => {
         });
 
     }catch (e) {
-        console.log(e);
         return res.status(500).send({
             status: false,
             message: e
@@ -31,12 +30,31 @@ module.exports.create = async (req, res) => {
 
 module.exports.get = async (req, res) => {
     try {
-        const bucketLists = await Bucketlist.findAll({
-            include: [{
-                model: Listitem,
-                as: 'items'
-            }]
-        });
+
+        const page = parseInt(req.query.page);
+        const limit = parseInt(req.query.limit);
+        let query;
+
+        if (page && page > 0 && limit && limit > 0){
+
+            const offset = (page - 1) * limit;
+            query = {
+                include: [{
+                    model: Listitem,
+                    as: 'items'
+                }],
+                offset: offset,
+                limit: limit
+            };
+        } else{
+            query = {
+                include: [{
+                    model: Listitem,
+                    as: 'items'
+                }]
+            };
+        }
+        const bucketLists = await Bucketlist.findAll(query);
 
         return res.status(200).send({
             status: true,
@@ -44,7 +62,6 @@ module.exports.get = async (req, res) => {
         });
 
     }catch (e) {
-        console.log(e);
         return res.status(500).send({
             status: false,
             message: e
@@ -70,7 +87,6 @@ module.exports.getById = async (req, res) => {
         });
 
     }catch (e) {
-        console.log(e);
         return res.status(500).send({
             status: false,
             message: e
@@ -109,7 +125,6 @@ module.exports.update = async (req, res) => {
         });
 
     }catch (e) {
-        console.log(e);
         return res.status(500).send({
             status: false,
             message: e
@@ -139,7 +154,6 @@ module.exports.delete = async (req, res) => {
         });
         
     }catch (e) {
-        console.log(e);
         return res.status(500).send({
             status: false,
             message: e

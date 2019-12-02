@@ -27,7 +27,8 @@ module.exports = {
       },
       done: {
         allowNull: false,
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       }
     }).then(() => queryInterface.addConstraint(
         'Listitems',

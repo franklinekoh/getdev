@@ -5,8 +5,8 @@ const express = require('express'),
     auth = require('../middlewares/auth').validateToken,
     validator = require('../middlewares/validator');
 
-router.post('/login', [validator.auth.login, validatorMsg], authController.login);
-router.get('/logout', [auth], authController.logout);
+router.post('/login', [validator.auth.login, validatorMsg], authController.login)
+    .get('/logout', [auth], authController.logout);
 
 
 module.exports = router;
