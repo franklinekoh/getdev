@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "bucketlist",
-    "host": "127.0.0.1",
+    "username": "bucketlist1",
+    "password": "mbj/4592",
+    "database": "bucketlist1",
+    "host": "db4free.net",
     "dialect": "mysql",
     "operatorsAliases": false
   },
