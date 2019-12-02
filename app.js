@@ -33,6 +33,14 @@ function loadApp(){
         next();
     });
 
+    app.get('/', function (req, res) {
+
+        return res.status(200).send({
+            status: true,
+            message: 'Welcome to bucketList API'
+        });
+    });
+
     app.use('/api/v1/auth', authRoute);
     app.use('/api/v1/bucketlists', bucketListRoute);
 
