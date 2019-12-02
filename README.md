@@ -10,10 +10,12 @@ This is a set of API endpoints for a bucketlist CRUD operation
 -   run  `nodemon server`
 
 ### test
-
--   visit `http://localhost:${APP_PORT}/api/v1` 
+-   Follow the instructions in the Local Section Setup Above.
+-   run `npx sequelize-cli db:migrate`
+-   run `npx sequelize-cli db:seed:all`
+-   visit `http://localhost:${APP_PORT}` 
 
 ### Live Url
 
-- https://young-sierra-41795.herokuapp.com/api-docs
+- https://frozen-tor-36953.herokuapp.com/api/v1/
 
