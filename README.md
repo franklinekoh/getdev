@@ -17,5 +17,5 @@ This is a set of API endpoints for a bucketlist CRUD operation
 
 ### Live Url
 
-- https://frozen-tor-36953.herokuapp.com/api/v1/
+- https://frozen-tor-36953.herokuapp.com/
 
