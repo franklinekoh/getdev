@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 module.exports = {
-    port: process.env.APP_PORT || 500,
+    port: process.env.PORT || 5000,
     secret: process.env.APP_KEY,
     auth: {
         exp: process.env.AUTH_EXP || '1h'
